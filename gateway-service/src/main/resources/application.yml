@@ -1,0 +1,29 @@
+server:
+  port: 8762
+spring:
+  application:
+    name: gateway-service
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  routes:
+#Custom routing rules
+     #model 1
+#    customizedRoute1:  #Can be customized
+#      serviceId: user-service
+#      path: /user-api/**
+
+#   model 1 is equivalent to model 2;
+    #model 2
+    user-service: /user-api/**
+  #exclude some routing rules
+  ignored-patterns:
+    - /user-service/uri1
+    - /user-service/uri2
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
